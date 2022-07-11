@@ -1,0 +1,2 @@
+# password-online
+How to securely store all of your passwords with no need to really record them anywhere?&lt;br> How to access to all your passwords from anywhere in the world?&lt;br> How to access to all your passwords with no need for a sign in and a huge pages to visit to get them all?&lt;br> How to access to all your passwords with just an URL?&lt;br> This script saves you a lot of time and brainstorming.
