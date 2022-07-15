@@ -1,4 +1,5 @@
 # password-online
+This project was made, just because of the need to the fastest secure online password reminder.<p>
 How to securely store all of your passwords with no need to really record them anywhere?<br>
 How to access to all your passwords from anywhere in the world?<br>
 How to access to all your passwords with no need for a sign in and a huge pages to visit to get them all?<br>
@@ -12,7 +13,8 @@ You can rename it to anything you like.
 Configuration:<br>
 Change these 2 parameters with your own ones <br>
 $key = 'MyKey12'; // Your own unique key <br>
-$timezone = 'America/New York'; The timezone you use. For the list of available zones, https://www.php.net/manual/en/timezones.php
+$timezone = 'America/New York'; The timezone you use. For the list of available zones, https://www.php.net/manual/en/timezones.php<br>
+$api_key = ''; // Get your own key from https://www.abstractapi.com/api/time-date-timezone-api (5000 requests per month)
 <p>  
 Usage:<br>
 https://www.example.com/password-online.php?secret=[timezone]&target=[target]
