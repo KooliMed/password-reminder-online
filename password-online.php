@@ -1,23 +1,24 @@
 <?php
-# Password-online v1.0
+# Password-online v1.0.1
 # https://github.com/KooliMed/password-online/
 # Please do not delete any of the above lines
 
 session_start();
-
 // Unique key. You MUST change this to your own key.
-$key = 'MyKey12';
-$timezone = 'America/New_York';
+$key = 'YourKeyHere'; //No Space, should be at least 5 letters and 1 number (no need to remember it)
+$timezone = 'Europe/Amsterdam';
+$api_key = 'ayahhsggetjkksoo2541sd4d55d22d58ee'; // Get your key from https://www.abstractapi.com/api/time-date-timezone-api
 
 # It's important to notice that we need to output the less message on this page, whatever error or information we could probably show to the user.
 // Get the true time, regardless of the configuration of the server or php
-function GetTime($timezone){
-	$handle = curl_init();
-	$url = "http://worldtimeapi.org/api/timezone/".$timezone;
-	curl_setopt($handle, CURLOPT_URL, $url);
-	curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-	$output = curl_exec($handle);
-	curl_close($handle);
+function GetTime($api_key,$timezone){
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, 'https://timezone.abstractapi.com/v1/current_time/?api_key='.$api_key.'&location='.$timezone);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	$output = curl_exec($ch);
+	curl_close($ch);
+	
 	$date = json_decode($output) -> datetime;
 	$secret_code=(substr($date,11,1)+9);
 	$secret_code.=(substr($date,12,1)+7);
@@ -28,7 +29,7 @@ function GetTime($timezone){
 
 
 // Simple way to put a limit to session for 15mn and reseting the whole process.
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 300)) {
     session_unset();  
     session_destroy();
 	echo 'Data unset..<br>'; // You should comment this line
@@ -41,7 +42,7 @@ if(!isset($_SESSION['secret'])){
 		echo 'No Secret'; // You should comment this line
 		exit;
 	} 
-	$secret_code = GetTime($timezone); // Get the true time
+	$secret_code = GetTime($api_key,$timezone);; // Get the true time
 	
 	// Check the secret word is the actual one, elsewhere we just exit; usuful for anything like robots, google..etc
 	if($_GET['secret'] != $secret_code){
