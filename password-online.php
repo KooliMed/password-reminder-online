@@ -52,16 +52,16 @@ if(!isset($_SESSION['secret'])){
 	
 	$_SESSION['secret'] = $secret_code; // The secret sent is valide; We record that and grant the user access for 15mn in case he needs to access this page more than one time.
 	echo 'Session recorded <br>'; // You should comment this line
-	if(isset($_GET[target]) && !empty($_GET[target])){
+	if(isset($_GET['target']) && !empty($_GET['target'])){
 	$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
-	echo substr(base64_encode(hash('sha256', $_GET[target].$key)),5,8);	
+	echo substr(base64_encode(hash('sha256', $_GET['target'].$key)),5,8);	
 	}
 }else{
 
 	echo 'Access already granted. Processing...<br>'; // You should comment this line
-	if(isset($_GET[target]) && !empty($_GET[target])){
+	if(isset($_GET['target']) && !empty($_GET['target'])){
 	$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
-	echo substr(base64_encode(hash('sha256', $_GET[target].$key)),5,8);	
+	echo substr(base64_encode(hash('sha256', $_GET['target'].$key)),5,8);	
 	}
 }
 ?>
